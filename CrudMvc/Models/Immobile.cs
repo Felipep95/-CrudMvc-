@@ -19,10 +19,12 @@ namespace CrudMvc.Models
 
         [Display(Name = "Ativo")]
         public bool IsActive { get; set; }
-        
-        [Display(Name = "CPF")]
+
+        [Display(Name = "Cliente")]
+        [Required(ErrorMessage = "Selecione o cliente")]
         public Guid ClientId { get; set; }
 
+        [Display(Name = "Cliente")]
         public Client Client { get; set; }
     }
 }

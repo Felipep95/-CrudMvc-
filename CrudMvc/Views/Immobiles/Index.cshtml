@@ -1,8 +1,6 @@
 ﻿@model IEnumerable<CrudMvc.Models.DapperModels.ImmobileDapper>
 
-@{
-    ViewData["Title"] = "Cadastro de imóveis";
-}
+@{ ViewData["Title"] = "Imóveis"; }
 
 <h1>@ViewData["Title"]</h1>
 
@@ -12,6 +10,9 @@
 <table class="table">
     <thead>
         <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.TypeBusiness)
             </th>
@@ -24,36 +25,33 @@
             <th>
                 @Html.DisplayNameFor(model => model.IsActive)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeBusiness)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Value)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" id="checkBtnEdit" class="btn btn-primary">Editar</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalhes</a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Deletar</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.TypeBusiness)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Value)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.IsActive)
+    </td>
+    <td>
+        <a asp-action="Edit" asp-route-id="@item.Id" id="checkBtnEdit" class="btn btn-primary">Editar</a>
+        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning">Detalhes</a>
+        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Deletar</a>
+    </td>
+</tr>}
     </tbody>
 </table>

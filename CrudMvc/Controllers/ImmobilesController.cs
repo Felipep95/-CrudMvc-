@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CrudMvc.Database.EntityFramework;
+using CrudMvc.Exceptions;
+using CrudMvc.Models;
+using CrudMvc.Repository.Interfaces;
+using CrudMvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CrudMvc.Database.EntityFramework;
-using CrudMvc.Models;
-using CrudMvc.Exceptions;
+using System;
 using System.Diagnostics;
-using CrudMvc.Repository.Interfaces;
-using CrudMvc.Services;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CrudMvc.Controllers
 {
@@ -49,7 +48,7 @@ namespace CrudMvc.Controllers
         public async Task<IActionResult> Create()
         {
             var activeClients = await _immobileService.FindActiveClients();
-            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Cpf");
+            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Name");
             return View();
         }
 
@@ -62,9 +61,9 @@ namespace CrudMvc.Controllers
                 await _immobileService.InsertAsync(immobile);
                 return RedirectToAction(nameof(Index));
             }
-            
+
             var activeClients = await _immobileService.FindActiveClients();
-            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Cpf", immobile.ClientId);
+            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Name", immobile.ClientId);
             return View(immobile);
         }
 
@@ -77,7 +76,7 @@ namespace CrudMvc.Controllers
             }
 
             var immobile = await _immobileService.FindByIdAsync(id.Value);
-            
+
             if (immobile == null)
             {
                 return NotFound();
@@ -85,7 +84,7 @@ namespace CrudMvc.Controllers
 
             var activeClients = await _immobileService.FindActiveClients();
 
-            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Cpf", immobile.ClientId);
+            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Name", immobile.ClientId);
             return View(immobile);
         }
 
@@ -109,7 +108,7 @@ namespace CrudMvc.Controllers
                 return RedirectToAction(nameof(Index));
             }
             var activeClients = await _immobileService.FindActiveClients();
-            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Cpf", immobile.ClientId);
+            ViewData["ClientId"] = new SelectList(activeClients, "Id", "Name", immobile.ClientId);
             return View(immobile);
         }
 

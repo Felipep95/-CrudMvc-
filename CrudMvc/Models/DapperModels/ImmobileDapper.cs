@@ -23,7 +23,8 @@ namespace CrudMvc.Models.DapperModels
         [Display(Name = "Ativo")]
         public bool IsActive { get; set; }
 
-        [Display(Name = "CPF")]
+        [Display(Name = "Cliente")]
+        [Required(ErrorMessage = "Selecione o cliente")]
         public Guid ClientId { get; set; }
 
         [Required(ErrorMessage = "Selecione o cliente")]
