@@ -2,10 +2,12 @@
 using CrudMvc.Models;
 using CrudMvc.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace CrudMvc.Controllers
 {
@@ -20,9 +22,18 @@ namespace CrudMvc.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? page)
         {
-            return View(await _clientService.FindAllAsync());
+            var itensByPage = 5;
+            var numberByPage = page ?? 1;
+
+            //var clientPagination = await _clientService.Pagination(numberByPage, itensByPage);
+
+            //return View(clientPagination);
+
+            var clients = await _clientService.FindAllAsync();
+
+            return View(clients.ToPagedList(numberByPage, itensByPage));
         }
 
         public async Task<IActionResult> Details(Guid? id)

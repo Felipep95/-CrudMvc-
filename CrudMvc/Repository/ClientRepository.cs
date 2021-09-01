@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace CrudMvc.Repository
 {
@@ -70,5 +71,13 @@ namespace CrudMvc.Repository
         {
             return _context.Clients.FirstOrDefault(x => x.Cpf == cpf);
         }
+
+        public Task<IPagedList<Client>> Pagination(int? page, int itensByPage)
+        {
+            var pageNumber = page ?? 1;
+            return _context.Clients.ToPagedListAsync(pageNumber, itensByPage);
+        }
+
+        //public virtual IQueryable<TEntity> Table => _dataProvider.GetTable<TEntity>(); TODO: implementar método
     }
 }

@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace CrudMvc.Services
 {
@@ -103,6 +104,11 @@ namespace CrudMvc.Services
         public Client FindByCpf(string cpf)
         {
             return _clientRepository.FindByCpf(cpf);
+        }
+
+        public async Task<IPagedList<Client>> Pagination(int? page, int itensByPage)
+        {
+             return await _clientRepository.Pagination(page, itensByPage);
         }
     }
 }

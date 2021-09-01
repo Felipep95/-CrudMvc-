@@ -1,6 +1,7 @@
 ﻿using CrudMvc.Database.EntityFramework;
 using CrudMvc.Exceptions;
 using CrudMvc.Models;
+using CrudMvc.Models.ViewModels;
 using CrudMvc.Repository.Interfaces;
 using CrudMvc.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -135,6 +136,13 @@ namespace CrudMvc.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
+            var client = _immobileService.FindByIdAsync(id);
+            
+            if (client.Result.ClientId != Guid.Empty)
+            {
+                return RedirectToAction(nameof(Error), new { message = "imóvel não pode ser excluido, pois há cliente associado, remova o cliente para poder remover o imóvel" });
+            }
+
             try
             {
                 await _immobileService.RemoveAsync(id);

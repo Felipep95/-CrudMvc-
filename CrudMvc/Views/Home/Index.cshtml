@@ -2,7 +2,59 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
+<input type="button" onclick="$('#fundo_modal').fadeIn()" value="Abrir modal" />
+
+<div id="home-page">
+
 </div>
+
+<script>
+    var modal_estilos = 'display: block;'
+        + 'width: 85%; max-width: 600px;'
+        + 'background: #fff; padding: 15px;'
+        + 'border-radius: 5px;'
+        + '-webkit-box-shadow: 0px 6px 14px -2px rgba(0,0,0,0.75);'
+        + '-moz-box-shadow: 0px 6px 14px -2px rgba(0,0,0,0.75);'
+        + 'box-shadow: 0px 6px 14px -2px rgba(0,0,0,0.75);'
+        + 'position: fixed;'
+        + 'top: 50%; left: 50%;'
+        + 'transform: translate(-50%,-50%);'
+        + 'z-index: 99999999; text-align: center';
+
+    var fundo_modal_estilos = 'top: 0; right: 0;'
+        + 'bottom: 0; left: 0; position: fixed;'
+        + 'background-color: rgba(0, 0, 0, 0.6); z-index: 99999999;'
+        + 'display: none;';
+
+    var meu_modal = '<div id="fundo_modal" style="' + fundo_modal_estilos + '">'
+        + '<div id="meu_modal" style="' + modal_estilos + '">'
+        + '<h5>Esqueceu sua senha?</h5><br />'
+        + '<form>'
+        + '<div class="row">'
+        + '<div class="col-sm-6">'
+        + '<div class="form-group">'
+        + '<input name="cpf_cnpj" class="form-control" type="tel" placeholder="CPF/CNPJ" />'
+        + '</div>'
+        + '<div class="form-group">'
+        + '<input name="email" style="max-width: 55%; float: left;" class="form-control" type="email" placeholder="Email" />'
+        + '<button style="float: left; margin-left: 15px;" type="submit" class="btn btn-secondary">Enviar</button>'
+        + '</div>'
+        + '</div>'
+        + '<div class="col-sm-6" style="text-align: left;">'
+        + 'Qualquer coisa aqui nesta coluna'
+        + '</div>'
+        + '</div>'
+        + '</form>'
+        + '<button type="button" class="close" style="top: 5px; right: 10px; position: absolute; cursor: pointer;"><span>&times;</span></button>'
+        + '</div></div>';
+
+    $("body").append(meu_modal);
+
+    $("#fundo_modal, .close").click(function () { $("#fundo_modal").hide(); });
+    $("#meu_modal").click(function (e) { e.stopPropagation(); }); 
+</script>
